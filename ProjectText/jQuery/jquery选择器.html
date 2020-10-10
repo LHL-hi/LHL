@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片切换</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        input {
+            width: 50px;
+            height: 50px;
+
+        }
+        ul {
+            list-style: none;
+        }
+        /*设置外面的div大小  遮住多余图片*/
+        .Box {
+            width: 300px;
+            height: 150px;
+            /*margin: 50% auto 0;*/
+            border: 1px solid pink;
+            overflow: hidden;/*超过范围的隐藏*/
+            margin-top: 30%;
+            margin-left: 50%;
+        }
+
+        div {
+            display: inline-block;
+        }
+        /*三个列表浮点设置靠左 则并排  三个以上用 , 隔开*/
+        .Center,.Left, .Right{
+            float: left;
+        }
+
+        .Left ul li {
+            font-size: 10px;
+            color: cadetblue;
+        }
+        .Right ul li {
+            font-size: 10px;
+            color: cadetblue;
+        }
+        .Center ul li {
+            padding-top: 0;
+        }
+    </style>
+    <script src="../js/jquery-1.12.2.js"></script>
+    <script>
+        $(function () {
+
+            $(".Left>ul>li>input").mouseover(function () {
+                // console.log("运行了")
+
+                $(this).css("background-color","red");
+                $(this).siblings(".btn").css("background-color","");
+
+                var index = $(this).parent().index();
+                $(".Center>ul>li:eq("+index+")").show();
+                $(".Center>ul>li:eq("+index+")").siblings("li").hide();
+
+            });
+            $(".Right>ul>li>input").mouseover(function () {
+                // $(this).css("background-color","");
+                $(this).css("background-color","red");
+                $(this).siblings(".btn").css("background-color","");
+                
+                var index = $(this).parent().index()+3;
+                $(".Center>ul>li:eq("+index+")").show();
+                $(".Center>ul>li:eq("+index+")").siblings("li").hide();
+            });
+            $(".btn").mouseleave(function () {
+                $(this).css("background-color","");
+            });
+        });
+    </script>
+
+</head>
+<body>
+<div class="Box" >
+    <div class="Left">
+        <ul>
+            <li><input type="button" value="猫" class="btn"></li>
+            <li><input type="button" value="狗" class="btn"></li>
+            <li><input type="button" value="马" class="btn"></li>
+        </ul>
+    </div>
+    <div class="Center">
+        <ul>
+            <li><img src="../images/cat.jpg" alt="猫" width="200px" height="150px" ></li>
+            <li><img src="../images/dog.jpg" alt="狗" width="200px" height="150px"> </li>
+            <li><img src="../images/ma.jpg" alt="马" width="200px" height="150px"></li>
+            <li><img src="../images/tiger.jpg" alt="虎" width="200px" height="150px"></li>
+            <li><img src="../images/tu.jpg" alt="兔" width="200px" height="150px"></li>
+            <li><img src="../images/xiang.jpg" alt="象" width="200px" height="150px"></li>
+        </ul>
+    </div>
+    <div class="Right">
+        <ul>
+            <li><input type="button" value="虎" class="btn"></li>
+            <li><input type="button" value="兔" class="btn"></li>
+            <li><input type="button" value="象" class="btn"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
